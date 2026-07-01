@@ -1,5 +1,5 @@
 const { loadEnvConfig } = require('@next/env')
-loadEnvConfig(process.cwd())
+loadEnvConfig(__dirname)
 
 const checkEnvVariables = require("./check-env-variables")
 
