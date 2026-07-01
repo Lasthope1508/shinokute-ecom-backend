@@ -16,7 +16,7 @@ RUN npm install --legacy-peer-deps
 
 # Copy source code
 COPY apps/backend ./apps/backend
-COPY eslint.config.ts tsconfig.json turbo.json ./
+COPY eslint.config.ts turbo.json ./
 
 # Build the backend package
 RUN npm run build --workspace=@dtc/backend
