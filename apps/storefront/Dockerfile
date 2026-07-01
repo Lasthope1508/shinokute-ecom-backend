@@ -16,7 +16,7 @@ RUN npm install --legacy-peer-deps
 
 # Copy source code of the storefront
 COPY apps/storefront ./apps/storefront
-COPY eslint.config.ts tsconfig.json turbo.json ./
+COPY eslint.config.ts turbo.json ./
 
 # Build the storefront package
 RUN npm run build --workspace=@dtc/storefront
