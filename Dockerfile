@@ -18,6 +18,9 @@ RUN npm install --legacy-peer-deps
 COPY apps/backend ./apps/backend
 COPY eslint.config.ts turbo.json ./
 
+# Set env flag to skip admin dashboard build during container compilation
+ENV DISABLE_MEDUSA_ADMIN=true
+
 # Build the backend package
 RUN npm run build --workspace=@dtc/backend
 
