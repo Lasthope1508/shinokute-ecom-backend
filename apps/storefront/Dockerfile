@@ -7,7 +7,7 @@ WORKDIR /app
 RUN apk add --no-cache libc6-compat
 
 # Copy root configs and package.json files
-COPY package.json ./
+COPY package.json package-lock.json ./
 COPY apps/backend/package.json ./apps/backend/
 COPY apps/storefront/package.json ./apps/storefront/
 
@@ -22,10 +22,12 @@ COPY eslint.config.ts turbo.json ./
 ARG NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
 ARG NEXT_PUBLIC_MEDUSA_BACKEND_URL
 ARG NEXT_PUBLIC_DEFAULT_REGION
+ARG NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY_MAP
 
 ENV NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=$NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
 ENV NEXT_PUBLIC_MEDUSA_BACKEND_URL=$NEXT_PUBLIC_MEDUSA_BACKEND_URL
 ENV NEXT_PUBLIC_DEFAULT_REGION=$NEXT_PUBLIC_DEFAULT_REGION
+ENV NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY_MAP=$NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY_MAP
 
 RUN npm run build --workspace=@dtc/storefront
 
