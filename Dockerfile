@@ -9,10 +9,9 @@ RUN apk add --no-cache libc6-compat
 # Copy root configs and package.json files
 COPY package.json ./
 COPY apps/backend/package.json ./apps/backend/
-COPY apps/storefront/package.json ./apps/storefront/
 
-# Install all dependencies
-RUN npm install --legacy-peer-deps
+# Install only backend workspace dependencies
+RUN npm install --workspace=@dtc/backend --include-workspace-root --legacy-peer-deps
 
 # Copy source code
 COPY apps/backend ./apps/backend
