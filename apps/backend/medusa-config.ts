@@ -22,13 +22,13 @@ module.exports = defineConfig({
       options: {
         providers: [
           {
-            resolve: "@medusajs/auth-emailpass",
+            resolve: "@medusajs/medusa/auth-emailpass",
             id: "emailpass",
             options: {},
           },
         ],
         session_cookie: {
-          sameSite: "none",
+          same_site: "none",
           secure: true,
         },
       },
