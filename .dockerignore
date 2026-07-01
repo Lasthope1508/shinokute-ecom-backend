@@ -1,0 +1,13 @@
+node_modules
+.next
+.medusa
+dist
+.git
+.gitignore
+.env
+.env.local
+medusa-dashboard.png
+medusa_keys_before.png
+medusa_keys_modal.png
+medusa_keys_after.png
+*.log
