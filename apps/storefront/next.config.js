@@ -1,5 +1,6 @@
-const { loadEnvConfig } = require('@next/env')
-loadEnvConfig(__dirname)
+process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY = "pk_36e54b4f9dc46dee19104bcbde266f89022ae61e7dad2d05d19d7d0c70c7c81e"
+process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL = "https://shinokute-ecom-backend-92655888360.asia-southeast1.run.app"
+process.env.NEXT_PUBLIC_DEFAULT_REGION = "us"
 
 const checkEnvVariables = require("./check-env-variables")
 
