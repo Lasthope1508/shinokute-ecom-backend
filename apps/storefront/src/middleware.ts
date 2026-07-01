@@ -123,25 +123,34 @@ export async function middleware(request: NextRequest) {
   const firstPathSegment = request.nextUrl.pathname.split("/")[1]?.toLowerCase()
   const urlHasCountry = firstPathSegment === country.toLowerCase()
 
+  let response = NextResponse.next()
   if (urlHasCountry) {
     if (!cacheIdCookie) {
-      const response = NextResponse.next()
       response.cookies.set("_medusa_cache_id", cacheId, {
         maxAge: 60 * 60 * 24,
       })
-      return response
     }
-    return NextResponse.next()
+  } else {
+    // if the url doesn't have the country, redirect to it
+    const redirectPath =
+      request.nextUrl.pathname === "/" ? "" : request.nextUrl.pathname
+    const queryString = request.nextUrl.search || ""
+    const redirectUrl = `${request.nextUrl.origin}/${country}${redirectPath}${queryString}`
+    response = NextResponse.redirect(redirectUrl, 307)
   }
 
-  // if the url doesn't have the country, redirect to it
-  const redirectPath =
-    request.nextUrl.pathname === "/" ? "" : request.nextUrl.pathname
-  const queryString = request.nextUrl.search || ""
-  const redirectUrl = `${request.nextUrl.origin}/${country}${redirectPath}${queryString}`
-
-  return NextResponse.redirect(redirectUrl, 307)
+  // Set publishable key cookie for client-side resolution on all requests
+  const publishableKey = getPublishableKey(host)
+  response.cookies.set("_medusa_pk", publishableKey, {
+    path: "/",
+    httpOnly: false, // Must be readable by client-side JS
+    sameSite: "lax",
+    secure: true
+  })
+  
+  return response
 }
+
 
 export const config = {
   matcher: [
