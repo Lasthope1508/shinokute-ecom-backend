@@ -7,7 +7,7 @@ WORKDIR /app
 RUN apk add --no-cache libc6-compat
 
 # Copy root configs and package.json files
-COPY package.json ./
+COPY package.json package-lock.json ./
 COPY apps/backend/package.json ./apps/backend/
 
 # Install only backend workspace dependencies
